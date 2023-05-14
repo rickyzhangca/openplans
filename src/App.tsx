@@ -1,7 +1,11 @@
 import { BaseStyles, ThemeProvider, theme, themeGet } from '@primer/react';
 import deepmerge from 'deepmerge';
 import { Toaster } from 'react-hot-toast';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from 'react-router-dom';
 import styled from 'styled-components';
 import { Header } from './components/Header/Header';
 import { fromTheme } from './theme/fromTheme';
@@ -24,10 +28,41 @@ const withNavigation = (Component: any) => {
   );
 };
 
+export const tabs = [
+  {
+    title: 'My plans',
+    value: 'my-plans',
+  },
+  {
+    title: 'Expert plans',
+    value: 'expert-plans',
+  },
+  {
+    title: 'About',
+    value: 'about',
+  },
+];
+
 const router = createBrowserRouter([
   {
+    path: '/',
+    element: withNavigation(<Navigate replace to="/my-plans" />),
+  },
+  {
+    path: '/my-plans',
+    element: withNavigation(<>1</>),
+  },
+  {
+    path: '/expert-plans',
+    element: withNavigation(<>2</>),
+  },
+  {
+    path: '/about',
+    element: withNavigation(<>3</>),
+  },
+  {
     path: '*',
-    element: withNavigation(<>hello world</>),
+    element: withNavigation(<Navigate replace to="/my-plans" />),
   },
 ]);
 

@@ -5,8 +5,8 @@ import {
   LogoContainer,
   RightContainer,
 } from './Header.styles';
-import { HeaderAboutButton } from './HeaderAboutButton';
 import { HeaderGitHubButton } from './HeaderGitHubButton';
+import { HeaderTabs } from './HeaderTabs/HeaderTabs';
 
 export const Header = () => {
   return (
@@ -15,10 +15,10 @@ export const Header = () => {
         <LogoContainer>
           <Logo />
         </LogoContainer>
+        <HeaderTabs />
       </LeftContainer>
       <RightContainer>
         <HeaderGitHubButton />
-        <HeaderAboutButton />
       </RightContainer>
     </Container>
   );
