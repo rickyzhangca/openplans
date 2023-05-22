@@ -3,14 +3,18 @@ import styled from 'styled-components';
 import { fromTheme } from '../../theme/fromTheme';
 
 export const Container = styled.div`
+  position: sticky;
+  top: 0;
   padding-left: 24px;
   padding-right: 16px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+  background-color: ${themeGet(fromTheme.colors.canvas.default)};
+  z-index: 1;
 `;
 
 export const LeftContainer = styled.div`

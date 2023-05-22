@@ -1,5 +1,6 @@
 import { BaseStyles, ThemeProvider, theme, themeGet } from '@primer/react';
 import deepmerge from 'deepmerge';
+import { Helmet } from 'react-helmet';
 import { Toaster } from 'react-hot-toast';
 import {
   Navigate,
@@ -9,22 +10,25 @@ import {
 import styled from 'styled-components';
 import { Header } from './components/Header/Header';
 import { fromTheme } from './theme/fromTheme';
+import { MyPlans } from './views/MyPlans/MyPlans';
 
 const withNavigation = (Component: any) => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        width: '100vw',
-        maxWidth: '100%',
-        height: '100vh',
-        maxHeight: '100%',
-      }}
-    >
+    <>
       <Header />
       {Component}
-    </div>
+    </>
+  );
+};
+
+const withTitle = (title: string, Component: any) => {
+  return (
+    <>
+      <Helmet>
+        <title>{title} - OpenPlans</title>
+      </Helmet>
+      {Component}
+    </>
   );
 };
 
@@ -46,28 +50,29 @@ export const tabs = [
 const router = createBrowserRouter([
   {
     path: '/',
-    element: withNavigation(<Navigate replace to="/my-plans" />),
+    element: <Navigate replace to="/my-plans" />,
   },
   {
     path: '/my-plans',
-    element: withNavigation(<>1</>),
+    element: withTitle('My Plans', withNavigation(<MyPlans />)),
   },
   {
     path: '/expert-plans',
-    element: withNavigation(<>2</>),
+    element: withTitle('Expert Plans', withNavigation(<>2</>)),
   },
   {
     path: '/about',
-    element: withNavigation(<>3</>),
+    element: withTitle('About', withNavigation(<>3</>)),
   },
   {
     path: '*',
-    element: withNavigation(<Navigate replace to="/my-plans" />),
+    element: <Navigate replace to="/my-plans" />,
   },
 ]);
 
 const ExtendedBaseStyles = styled(BaseStyles)`
   font-family: 'Inter', ${themeGet(fromTheme.fonts.normal)};
+  font-size: ${themeGet(fromTheme.fontSizes[1])};
   div {
     transition: 0.1s ${themeGet(fromTheme.animation.easeOutCubic)};
   }
