@@ -1,6 +1,6 @@
 import { BaseStyles, ThemeProvider, theme, themeGet } from '@primer/react';
 import deepmerge from 'deepmerge';
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
 import {
   Navigate,
@@ -82,12 +82,14 @@ function App() {
   const bentoGridsTheme = deepmerge(theme, {});
 
   return (
-    <ThemeProvider theme={bentoGridsTheme}>
-      <ExtendedBaseStyles>
-        <RouterProvider router={router} />
-        <Toaster />
-      </ExtendedBaseStyles>
-    </ThemeProvider>
+    <HelmetProvider>
+      <ThemeProvider theme={bentoGridsTheme}>
+        <ExtendedBaseStyles>
+          <RouterProvider router={router} />
+          <Toaster />
+        </ExtendedBaseStyles>
+      </ThemeProvider>
+    </HelmetProvider>
   );
 }
 
