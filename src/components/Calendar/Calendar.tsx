@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Plan } from '../../hooks/usePlan';
 import { TitleMedium } from '../../theme/typography';
 import {
+  AddMonthButtonContainer,
   Container,
   DayName,
   DayNamesContainer,
@@ -31,6 +32,7 @@ export const Calendar = ({ lilius, plan }: CalendarProps) => {
         <TitleMedium>{`${dayjs(firstDayOfMonth).format('MMM')} ${dayjs(
           firstDayOfMonth,
         ).format('YYYY')}`}</TitleMedium>
+        <AddMonthButtonContainer>Add</AddMonthButtonContainer>
       </MonthHeader>
     );
 

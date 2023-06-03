@@ -19,9 +19,24 @@ export const MonthContainer = styled.div`
 `;
 
 export const MonthHeader = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   padding: 20px 20px 12px 20px;
+`;
+
+export const AddMonthButtonContainer = styled.div`
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid ${themeGet(fromTheme.colors.border.default)};
+  background-color: ${themeGet(fromTheme.colors.canvas.default)};
+  cursor: pointer;
 `;
 
 export const DayNamesContainer = styled.div`
