@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { Returns } from 'use-lilius';
+import { memo } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { DayPlan, RunTypes } from '../../../hooks/usePlan';
 import { BodyLarge } from '../../../theme/typography';
@@ -11,55 +11,65 @@ import {
 } from './Day.styles';
 
 type DayProps = {
-  lilius: Returns;
+  selected: Date;
+  onSelect: (day: Date) => void;
   day: Date;
   dayPlan: DayPlan[];
   firstDayOfMonth: Date;
   lastDayOfMonth: Date;
 };
 
-export const Day = ({
-  lilius,
-  day,
-  dayPlan,
-  firstDayOfMonth,
-  lastDayOfMonth,
-}: DayProps) => {
-  return (
-    <>
-      {dayjs(day).isBetween(firstDayOfMonth, lastDayOfMonth, 'day', '[]') ? (
-        lilius.isSelected(day) ? (
-          <SelectedDayContainer
-            key={uuidv4()}
-            onClick={() => {
-              lilius.setSelected([day]);
-            }}
-          >
-            <BodyLarge>{dayjs(day).format('D')}</BodyLarge>
-            {dayPlan ? (
-              <Chip type={dayPlan[0].runType} distance={dayPlan[0].distance} />
-            ) : (
-              <Chip type={RunTypes.REST} />
-            )}
-          </SelectedDayContainer>
+export const Day = memo(
+  ({
+    selected,
+    onSelect,
+    day,
+    dayPlan,
+    firstDayOfMonth,
+    lastDayOfMonth,
+  }: DayProps) => {
+    return (
+      <>
+        {dayjs(day).isBetween(firstDayOfMonth, lastDayOfMonth, 'day', '[]') ? (
+          selected === day ? (
+            <SelectedDayContainer
+              key={uuidv4()}
+              onClick={() => {
+                onSelect(day);
+              }}
+            >
+              <BodyLarge>{dayjs(day).format('D')}</BodyLarge>
+              {dayPlan ? (
+                <Chip
+                  type={dayPlan[0].runType}
+                  distance={dayPlan[0].distance}
+                />
+              ) : (
+                <Chip type={RunTypes.REST} />
+              )}
+            </SelectedDayContainer>
+          ) : (
+            <DayContainer
+              key={uuidv4()}
+              onClick={() => {
+                onSelect(day);
+              }}
+            >
+              <BodyLarge>{dayjs(day).format('D')}</BodyLarge>
+              {dayPlan ? (
+                <Chip
+                  type={dayPlan[0].runType}
+                  distance={dayPlan[0].distance}
+                />
+              ) : (
+                <Chip type={RunTypes.REST} />
+              )}
+            </DayContainer>
+          )
         ) : (
-          <DayContainer
-            key={uuidv4()}
-            onClick={(e) => {
-              lilius.setSelected([day]);
-            }}
-          >
-            <BodyLarge>{dayjs(day).format('D')}</BodyLarge>
-            {dayPlan ? (
-              <Chip type={dayPlan[0].runType} distance={dayPlan[0].distance} />
-            ) : (
-              <Chip type={RunTypes.REST} />
-            )}
-          </DayContainer>
-        )
-      ) : (
-        <EmptyDayContainer key={uuidv4()} />
-      )}
-    </>
-  );
-};
+          <EmptyDayContainer key={uuidv4()} />
+        )}
+      </>
+    );
+  },
+);

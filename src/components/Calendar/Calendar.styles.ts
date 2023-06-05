@@ -1,56 +1,47 @@
 import { themeGet } from '@primer/react';
 import styled from 'styled-components';
 import { fromTheme } from '../../theme/fromTheme';
-import { BodyMedium } from '../../theme/typography';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 12px;
-`;
-
-export const MonthContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  border-radius: 12px;
-  border: 1px solid ${themeGet(fromTheme.colors.border.default)};
-  gap: 8px;
-  padding-bottom: 8px;
-`;
-
-export const MonthHeader = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 20px 12px 20px;
+  padding-bottom: 100px;
 `;
 
 export const AddMonthButtonContainer = styled.div`
-  position: absolute;
-  top: -50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(50%);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 12px;
+  gap: 8px;
+  padding: 6px 15px 6px 12px;
   border: 1px solid ${themeGet(fromTheme.colors.border.default)};
+  border-radius: 20px;
   background-color: ${themeGet(fromTheme.colors.canvas.default)};
   cursor: pointer;
+  user-select: none;
+  :hover {
+    background-color: ${themeGet(fromTheme.colors.canvas.subtle)};
+  }
 `;
 
-export const DayNamesContainer = styled.div`
+export const AddPreviousMonthButtonWrapper = styled.div`
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
   display: flex;
-  gap: 8px;
-  padding: 0 16px;
-  border-bottom: 1px solid ${themeGet(fromTheme.colors.border.default)};
-`;
-
-export const DayName = styled(BodyMedium)`
-  display: flex;
-  width: 100%;
-  justify-content: center;
   align-items: center;
-  padding: 12px;
-  color: ${themeGet(fromTheme.colors.fg.muted)};
+  justify-content: center;
+  z-index: 1;
+  ${AddMonthButtonContainer} {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+  :hover {
+    ${AddMonthButtonContainer} {
+      opacity: 1;
+    }
+  }
 `;

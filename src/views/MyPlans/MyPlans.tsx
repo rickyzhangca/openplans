@@ -2,7 +2,7 @@ import { MoveToBottomIcon } from '@primer/octicons-react';
 import { FormControl, IconButton, SegmentedControl } from '@primer/react';
 import dayjs from 'dayjs';
 import { useLilius } from 'use-lilius';
-import { useEffectOnce } from 'usehooks-ts';
+import { useEffectOnce, useLocalStorage } from 'usehooks-ts';
 import { Calendar } from '../../components/Calendar/Calendar';
 import { DayPlanViewer } from '../../components/DayPlanViewer/DayPlanViewer';
 import usePlan, { RunTypes } from '../../hooks/usePlan';
@@ -15,7 +15,11 @@ import {
 } from './MyPlans.styles';
 
 export const MyPlans = () => {
-  const lilius = useLilius({ numberOfMonths: 3 });
+  const [numberOfMonths, setNumberOfMonths] = useLocalStorage(
+    'number-of-months',
+    2,
+  );
+  const lilius = useLilius({ numberOfMonths: numberOfMonths });
   const plan = usePlan();
 
   useEffectOnce(() => {
@@ -32,7 +36,13 @@ export const MyPlans = () => {
   return (
     <Container>
       <LeftContainer>
-        <Calendar lilius={lilius} plan={plan} />
+        <Calendar
+          lilius={lilius}
+          plan={plan}
+          onSetNumberOfMonths={(numberOfMonths) =>
+            setNumberOfMonths(numberOfMonths)
+          }
+        />
         <ExportBarContainer>
           Export
           <ExportBarContentContainer>

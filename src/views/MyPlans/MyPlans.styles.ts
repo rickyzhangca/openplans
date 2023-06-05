@@ -13,7 +13,7 @@ export const Container = styled.div`
 
 export const LeftContainer = styled.div`
   display: flex;
-  overflow: auto;
+  overflow: visible;
   flex-direction: column;
   position: relative;
   width: 100%;

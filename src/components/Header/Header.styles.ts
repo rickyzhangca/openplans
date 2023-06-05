@@ -2,13 +2,13 @@ import { themeGet } from '@primer/react';
 import styled from 'styled-components';
 import { fromTheme } from '../../theme/fromTheme';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ minimal: boolean }>`
   display: flex;
   flex-direction: column;
   position: sticky;
   top: 0;
   height: 80px;
-  z-index: 1;
+  ${(props) => props.minimal && 'z-index: 1;'}
 `;
 
 export const Container = styled.div<{ minimal: boolean }>`

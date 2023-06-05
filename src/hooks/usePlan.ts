@@ -1,4 +1,5 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
+import { useLocalStorage } from 'usehooks-ts';
 
 export enum RunTypes {
   EASY_RUN,
@@ -25,9 +26,7 @@ export type Plan = {
 };
 
 const usePlan = () => {
-  const [data, setData] = useState<PlanData>({
-    // test: [{ runType: RunTypes.EASY_RUN, distance: 4.8 }],
-  });
+  const [data, setData] = useLocalStorage<PlanData>('plan', {});
 
   const setDayPlan = (day: Date, dayPlan: DayPlan[]) => {
     const newData = { ...data };
@@ -41,7 +40,7 @@ const usePlan = () => {
     setData(newData);
   };
 
-  const plan = { data, setData, setDayPlan, removeDayPlan };
+  const plan: Plan = { data, setData, setDayPlan, removeDayPlan };
 
   return plan;
 };

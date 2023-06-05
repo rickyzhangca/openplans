@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import useScrollPosition from '../../hooks/useScrollPosition';
 import { Logo } from '../Logo/Logo';
 import {
@@ -15,7 +14,7 @@ export const Header = () => {
   const scrollPosition = useScrollPosition();
 
   return (
-    <Wrapper>
+    <Wrapper minimal={scrollPosition > 0}>
       <Container minimal={scrollPosition > 0}>
         <LeftContainer>
           <LogoContainer>
