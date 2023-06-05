@@ -19,7 +19,15 @@ export const MyPlans = () => {
     'number-of-months',
     2,
   );
-  const lilius = useLilius({ numberOfMonths: numberOfMonths });
+  const [viewing, setViewing] = useLocalStorage(
+    'default-viewing',
+    dayjs().subtract(1, 'month').toDate(),
+  );
+
+  const lilius = useLilius({
+    viewing: dayjs(viewing).toDate(),
+    numberOfMonths: numberOfMonths,
+  });
   const plan = usePlan();
 
   useEffectOnce(() => {
@@ -39,6 +47,7 @@ export const MyPlans = () => {
         <Calendar
           lilius={lilius}
           plan={plan}
+          setViewing={(day) => setViewing(day)}
           onSetNumberOfMonths={(numberOfMonths) =>
             setNumberOfMonths(numberOfMonths)
           }

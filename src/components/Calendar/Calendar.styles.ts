@@ -10,12 +10,12 @@ export const Container = styled.div`
   padding-bottom: 100px;
 `;
 
-export const AddMonthButtonContainer = styled.div`
+export const MonthControlButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
-  padding: 6px 15px 6px 12px;
+  padding: 6px 16px 6px 12px;
   border: 1px solid ${themeGet(fromTheme.colors.border.default)};
   border-radius: 20px;
   background-color: ${themeGet(fromTheme.colors.canvas.default)};
@@ -26,21 +26,30 @@ export const AddMonthButtonContainer = styled.div`
   }
 `;
 
-export const AddPreviousMonthButtonWrapper = styled.div`
+export const MonthControlButtonContainer = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+`;
+
+export const MonthControlButtonAbsoluteContainer = styled(
+  MonthControlButtonContainer,
+)`
   position: absolute;
   top: 0px;
   left: 0px;
   right: 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 0px;
   z-index: 1;
-  ${AddMonthButtonContainer} {
+  ${MonthControlButton} {
     transform: translateY(-50%);
     opacity: 0;
   }
   :hover {
-    ${AddMonthButtonContainer} {
+    ${MonthControlButton} {
       opacity: 1;
     }
   }
