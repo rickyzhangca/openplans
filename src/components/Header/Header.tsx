@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import useScrollPosition from '../../hooks/useScrollPosition';
 import { Logo } from '../Logo/Logo';
 import {
@@ -12,12 +13,13 @@ import { HeaderTabs } from './HeaderTabs/HeaderTabs';
 
 export const Header = () => {
   const scrollPosition = useScrollPosition();
+  const navigate = useNavigate();
 
   return (
     <Wrapper minimal={scrollPosition > 0}>
       <Container minimal={scrollPosition > 0}>
         <LeftContainer>
-          <LogoContainer>
+          <LogoContainer onClick={() => navigate('/')}>
             <Logo />
           </LogoContainer>
           <HeaderTabs />

@@ -10,6 +10,7 @@ import {
 import styled from 'styled-components';
 import { Header } from './components/Header/Header';
 import { fromTheme } from './theme/fromTheme';
+import { About } from './views/About/About';
 import { MyPlans } from './views/MyPlans/MyPlans';
 
 const withNavigation = (Component: any) => {
@@ -62,7 +63,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/about',
-    element: withTitle('About', withNavigation(<>3</>)),
+    element: withTitle('About', withNavigation(<About />)),
   },
   {
     path: '*',
