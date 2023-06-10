@@ -33,10 +33,12 @@ export const MyPlans = () => {
   useEffectOnce(() => {
     const today = dayjs().startOf('day').toDate();
     lilius.setSelected([today]);
+    console.log('should set');
+
     plan.setDayPlan(today, [
       {
         runType: RunTypes.EASY_RUN,
-        distance: 4.8,
+        distance: 5,
       },
     ]);
   });
