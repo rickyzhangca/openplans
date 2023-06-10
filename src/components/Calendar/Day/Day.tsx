@@ -31,7 +31,7 @@ export const Day = memo(
     return (
       <>
         {dayjs(day).isBetween(firstDayOfMonth, lastDayOfMonth, 'day', '[]') ? (
-          selected === day ? (
+          dayjs(selected).isSame(day) ? (
             <SelectedDayContainer
               key={uuidv4()}
               onClick={() => {
