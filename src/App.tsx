@@ -38,10 +38,12 @@ export const tabs = [
     title: 'My plans',
     value: 'my-plans',
   },
+  /*
   {
     title: 'Expert plans',
     value: 'expert-plans',
   },
+  */
   {
     title: 'About',
     value: 'about',
