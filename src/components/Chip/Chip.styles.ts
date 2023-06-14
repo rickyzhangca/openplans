@@ -1,7 +1,6 @@
 import { themeGet } from '@primer/react';
 import styled from 'styled-components';
 import { fromTheme } from '../../theme/fromTheme';
-import { BodyLarge } from '../../theme/typography';
 
 export const Wrapper = styled.div<{ small: boolean }>`
   position: relative;
@@ -21,10 +20,6 @@ export const Container = styled.div<{
   border-radius: 13.5px;
   color: ${themeGet(fromTheme.colors.fg.onEmphasis)};
   background-color: ${(props) => props.backgroundColor};
-  ${BodyLarge} {
-    // optical alignment
-    transform: translateY(0.5px);
-  }
 `;
 
 export const Shadow = styled.div<{ backgroundColor: string }>`

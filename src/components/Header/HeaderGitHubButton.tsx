@@ -3,7 +3,7 @@ import { HeaderIconContainer } from './Header.styles';
 
 export const HeaderGitHubButton = () => {
   return (
-    <Link to={'https://github.com/rickyzhangca/openplans/'} target="_blank">
+    <Link to="https://github.com/rickyzhangca/openplans/" target="_blank">
       <HeaderIconContainer>
         <svg
           xmlns="http://www.w3.org/2000/svg"

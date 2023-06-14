@@ -95,7 +95,7 @@ export const DayPlanViewer = ({ lilius, plan }: DayPlanViewerProps) => {
           onBlur={() =>
             plan.setDayPlan(selectedDay, [
               {
-                runType: runType,
+                runType,
                 distance: Number(currentDistance),
               },
             ])
@@ -110,7 +110,7 @@ export const DayPlanViewer = ({ lilius, plan }: DayPlanViewerProps) => {
   );
 
   return (
-    <Container>
+    <Container hasSelectedDay={!!selectedDay}>
       {renderHeader()}
       {renderOptions()}
       {renderConfigs()}

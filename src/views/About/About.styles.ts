@@ -1,6 +1,8 @@
 import { themeGet } from '@primer/react';
 import styled from 'styled-components';
+import { devices } from '../../theme/device';
 import { fromTheme } from '../../theme/fromTheme';
+import { BodyLarge } from '../../theme/typography';
 
 export const Container = styled.div`
   display: flex;
@@ -9,6 +11,10 @@ export const Container = styled.div`
   gap: 16px;
   align-items: flex-start;
   position: relative;
+  @media ${devices.mobile} {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 `;
 
 export const HeaderSection = styled.div`
@@ -17,10 +23,16 @@ export const HeaderSection = styled.div`
   align-items: center;
   justify-content: center;
   gap: 32px;
-  padding: 128px 12px;
+  padding: 128px 24px;
   width: 100%;
   border-radius: 12px;
   border: 1px solid ${themeGet(fromTheme.colors.border.default)};
 `;
 
-export const HeaderSectionImage = styled.img``;
+export const HeaderSectionImage = styled.img`
+  width: 100%;
+`;
+
+export const HeaderSectionText = styled(BodyLarge)`
+  text-align: center;
+`;

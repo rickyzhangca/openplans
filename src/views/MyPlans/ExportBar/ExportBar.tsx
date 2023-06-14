@@ -16,7 +16,7 @@ type ExportBarProps = {
 
 export const ExportBar = ({ calendar }: ExportBarProps) => {
   const [exportType, setExportType] = useState<ExportType>('pdf');
-
+  return null;
   return (
     <ExportBarContainer>
       Export
@@ -38,7 +38,6 @@ export const ExportBar = ({ calendar }: ExportBarProps) => {
                   return;
                 case 3:
                   setExportType('json');
-                  return;
               }
             }}
           >
@@ -76,13 +75,12 @@ export const ExportBar = ({ calendar }: ExportBarProps) => {
             switch (exportType) {
               case 'pdf':
                 exportPlanToPDF(calendar);
-                return;
+
               case 'png':
-                return;
+
               case 'ics':
-                return;
+
               case 'json':
-                return;
             }
           }}
         />

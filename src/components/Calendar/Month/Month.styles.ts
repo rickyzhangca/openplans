@@ -1,5 +1,6 @@
 import { themeGet } from '@primer/react';
 import styled from 'styled-components';
+import { devices } from '../../../theme/device';
 import { fromTheme } from '../../../theme/fromTheme';
 import { BodyMedium } from '../../../theme/typography';
 
@@ -25,6 +26,9 @@ export const DayNamesContainer = styled.div`
   gap: 8px;
   padding: 0 16px;
   border-bottom: 1px solid ${themeGet(fromTheme.colors.border.default)};
+  @media ${devices.mobile} {
+    padding: 0 8px;
+  }
 `;
 
 export const DayName = styled(BodyMedium)`
@@ -32,6 +36,6 @@ export const DayName = styled(BodyMedium)`
   width: 100%;
   justify-content: center;
   align-items: center;
-  padding: 12px;
+  padding: 12px 0px;
   color: ${themeGet(fromTheme.colors.fg.muted)};
 `;

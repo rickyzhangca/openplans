@@ -1,5 +1,9 @@
-import { BodyLarge } from '../../theme/typography';
-import { Container, HeaderSection, HeaderSectionImage } from './About.styles';
+import {
+  Container,
+  HeaderSection,
+  HeaderSectionImage,
+  HeaderSectionText,
+} from './About.styles';
 
 import headerLogo from './assets/headerLogo.svg';
 
@@ -8,9 +12,9 @@ export const About = () => {
     <Container>
       <HeaderSection>
         <HeaderSectionImage src={headerLogo} />
-        <BodyLarge>
+        <HeaderSectionText>
           An open-sourced running plan generator to make your training easy.
-        </BodyLarge>
+        </HeaderSectionText>
       </HeaderSection>
     </Container>
   );

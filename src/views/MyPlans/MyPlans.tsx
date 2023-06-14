@@ -4,6 +4,7 @@ import { useEffectOnce, useLocalStorage } from 'usehooks-ts';
 import { Calendar } from '../../components/Calendar/Calendar';
 import { DayPlanViewer } from '../../components/DayPlanViewer/DayPlanViewer';
 import usePlan, { RunTypes } from '../../hooks/usePlan';
+import { ExportBar } from './ExportBar/ExportBar';
 import { Container, LeftContainer, RightContainer } from './MyPlans.styles';
 
 export const MyPlans = () => {
@@ -18,7 +19,7 @@ export const MyPlans = () => {
 
   const lilius = useLilius({
     viewing: dayjs(viewing).toDate(),
-    numberOfMonths: numberOfMonths,
+    numberOfMonths,
   });
   const plan = usePlan();
 
@@ -46,7 +47,10 @@ export const MyPlans = () => {
 
   return (
     <Container>
-      <LeftContainer>{calendar}</LeftContainer>
+      <LeftContainer>
+        {calendar}
+        <ExportBar calendar={calendar} />
+      </LeftContainer>
       <RightContainer>
         <DayPlanViewer lilius={lilius} plan={plan} />
       </RightContainer>

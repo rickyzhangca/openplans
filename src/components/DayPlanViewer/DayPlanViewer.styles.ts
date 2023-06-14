@@ -1,11 +1,20 @@
 import { themeGet } from '@primer/react';
 import styled from 'styled-components';
+import { devices } from '../../theme/device';
 import { fromTheme } from '../../theme/fromTheme';
 import { BodySmall } from '../../theme/typography';
 
-export const Container = styled.div`
+export const Container = styled.div<{ hasSelectedDay: boolean }>`
   display: flex;
   flex-direction: column;
+  background-color: ${themeGet(fromTheme.colors.canvas.default)};
+  border: 1px solid ${themeGet(fromTheme.colors.border.default)};
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: ${themeGet(fromTheme.shadows.shadow.extraLarge)};
+  @media ${devices.mobile} {
+    ${(props) => (props.hasSelectedDay ? 'display: block;' : 'display: none;')}
+  }
 `;
 
 export const HeaderPlaceholderText = styled(BodySmall)`
@@ -32,6 +41,10 @@ export const HeaderXIconWrapper = styled.div`
   cursor: pointer;
   :hover {
     color: ${themeGet(fromTheme.colors.fg.default)};
+  }
+  @media ${devices.mobile} {
+    top: 8px;
+    right: 8px;
   }
 `;
 
