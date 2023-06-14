@@ -24,6 +24,7 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'react-refresh'],
   rules: {
+    'import/prefer-default-export': 'off',
     '@typescript-eslint/ban-ts-comment': 'warn',
     '@typescript-eslint/no-unused-vars': 'warn',
     'react/require-default-props': 'off',
