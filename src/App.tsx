@@ -10,30 +10,11 @@ import {
 import styled from 'styled-components';
 import { Header } from './components/Header/Header';
 import { fromTheme } from './theme/fromTheme';
+import { HeaderTabsType } from './types/ui';
 import { About } from './views/About/About';
 import { MyPlans } from './views/MyPlans/MyPlans';
 
-const withNavigation = (Component: any) => {
-  return (
-    <>
-      <Header />
-      {Component}
-    </>
-  );
-};
-
-const withTitle = (title: string, Component: any) => {
-  return (
-    <>
-      <Helmet>
-        <title>{title} - OpenPlans</title>
-      </Helmet>
-      {Component}
-    </>
-  );
-};
-
-export const tabs = [
+const tabs: HeaderTabsType = [
   {
     title: 'My plans',
     value: 'my-plans',
@@ -49,6 +30,26 @@ export const tabs = [
     value: 'about',
   },
 ];
+
+const withNavigation = (Component: JSX.Element) => {
+  return (
+    <>
+      <Header tabs={tabs} />
+      {Component}
+    </>
+  );
+};
+
+const withTitle = (title: string, Component: JSX.Element) => {
+  return (
+    <>
+      <Helmet>
+        <title>{title} - OpenPlans</title>
+      </Helmet>
+      {Component}
+    </>
+  );
+};
 
 const router = createBrowserRouter([
   {

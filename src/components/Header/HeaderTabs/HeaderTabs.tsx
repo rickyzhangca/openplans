@@ -1,10 +1,14 @@
 import { useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import { tabs } from '../../../App';
+import { HeaderTabsType } from '../../../types/ui';
 import { Tab, TabsHighlight, TabsNav } from './HeaderTabs.styles';
 
-export const HeaderTabs = () => {
+type HeaderTabsProps = {
+  tabs: HeaderTabsType;
+};
+
+export const HeaderTabs = ({ tabs }: HeaderTabsProps) => {
   const [tabBoundingBox, setTabBoundingBox] = useState(null);
   const [wrapperBoundingBox, setWrapperBoundingBox] = useState(null);
   const [highlightedTab, setHighlightedTab] = useState(null);
