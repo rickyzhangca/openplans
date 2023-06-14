@@ -29,15 +29,18 @@ export const ExportBar = ({ calendar }: ExportBarProps) => {
               switch (i) {
                 case 0:
                   setExportType('pdf');
-                  return;
+                  break;
                 case 1:
                   setExportType('png');
-                  return;
+                  break;
                 case 2:
                   setExportType('ics');
-                  return;
+                  break;
                 case 3:
                   setExportType('json');
+                  break;
+                default:
+                  break;
               }
             }}
           >
