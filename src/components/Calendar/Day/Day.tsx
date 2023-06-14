@@ -28,48 +28,43 @@ export const Day = memo(
     firstDayOfMonth,
     lastDayOfMonth,
   }: DayProps) => {
-    return (
-      <>
-        {dayjs(day).isBetween(firstDayOfMonth, lastDayOfMonth, 'day', '[]') ? (
-          dayjs(selected).isSame(day) ? (
-            <SelectedDayContainer
-              key={uuidv4()}
-              onClick={() => {
-                onSelect(day);
-              }}
-            >
-              <BodyLarge>{dayjs(day).format('D')}</BodyLarge>
-              {dayPlan ? (
-                <Chip
-                  type={dayPlan[0].runType}
-                  distance={dayPlan[0].distance}
-                />
-              ) : (
-                <Chip type={RunTypes.REST} />
-              )}
-            </SelectedDayContainer>
+    return dayjs(day).isBetween(
+      firstDayOfMonth,
+      lastDayOfMonth,
+      'day',
+      '[]',
+    ) ? (
+      dayjs(selected).isSame(day) ? (
+        <SelectedDayContainer
+          key={uuidv4()}
+          onClick={() => {
+            onSelect(day);
+          }}
+        >
+          <BodyLarge>{dayjs(day).format('D')}</BodyLarge>
+          {dayPlan ? (
+            <Chip type={dayPlan[0].runType} distance={dayPlan[0].distance} />
           ) : (
-            <DayContainer
-              key={uuidv4()}
-              onClick={() => {
-                onSelect(day);
-              }}
-            >
-              <BodyLarge>{dayjs(day).format('D')}</BodyLarge>
-              {dayPlan ? (
-                <Chip
-                  type={dayPlan[0].runType}
-                  distance={dayPlan[0].distance}
-                />
-              ) : (
-                <Chip type={RunTypes.REST} />
-              )}
-            </DayContainer>
-          )
-        ) : (
-          <EmptyDayContainer key={uuidv4()} />
-        )}
-      </>
+            <Chip type={RunTypes.REST} />
+          )}
+        </SelectedDayContainer>
+      ) : (
+        <DayContainer
+          key={uuidv4()}
+          onClick={() => {
+            onSelect(day);
+          }}
+        >
+          <BodyLarge>{dayjs(day).format('D')}</BodyLarge>
+          {dayPlan ? (
+            <Chip type={dayPlan[0].runType} distance={dayPlan[0].distance} />
+          ) : (
+            <Chip type={RunTypes.REST} />
+          )}
+        </DayContainer>
+      )
+    ) : (
+      <EmptyDayContainer key={uuidv4()} />
     );
   },
 );

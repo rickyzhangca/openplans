@@ -31,6 +31,7 @@ export const HeaderSection = styled.div`
 
 export const HeaderSectionImage = styled.img`
   width: 100%;
+  max-width: 480px;
 `;
 
 export const HeaderSectionText = styled(BodyLarge)`

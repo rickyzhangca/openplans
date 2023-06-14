@@ -19,7 +19,7 @@ type ChipProps = {
 export const Chip = ({ type, distance, small }: ChipProps) => {
   const theme = useTheme();
 
-  const getBackgroundColor = () => {
+  const getBackgroundColor = (): string => {
     switch (type) {
       case RunTypes.EASY_RUN:
         return theme.theme.colors.success.fg;
@@ -31,10 +31,12 @@ export const Chip = ({ type, distance, small }: ChipProps) => {
         return theme.theme.colors.danger.emphasis;
       case RunTypes.REST:
         return theme.theme.colors.border.default;
+      default:
+        return '';
     }
   };
 
-  const getIcon = () => {
+  const getIcon = (): JSX.Element => {
     switch (type) {
       case RunTypes.EASY_RUN:
         return <EasyRunIcon fill={theme.theme.colors.fg.onEmphasis} />;
@@ -46,6 +48,8 @@ export const Chip = ({ type, distance, small }: ChipProps) => {
         return <RaceDayIcon fill={theme.theme.colors.fg.onEmphasis} />;
       case RunTypes.REST:
         return <RestIcon fill={theme.theme.colors.fg.onEmphasis} />;
+      default:
+        return null;
     }
   };
 

@@ -11,9 +11,9 @@ export const Container = styled.div<{ hasSelectedDay: boolean }>`
   border: 1px solid ${themeGet(fromTheme.colors.border.default)};
   overflow: hidden;
   border-radius: 12px;
-  box-shadow: ${themeGet(fromTheme.shadows.shadow.extraLarge)};
   @media ${devices.mobile} {
     ${(props) => (props.hasSelectedDay ? 'display: block;' : 'display: none;')}
+    box-shadow: ${themeGet(fromTheme.shadows.shadow.extraLarge)};
   }
 `;
 

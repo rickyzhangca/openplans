@@ -20,7 +20,7 @@ type DayPlanViewerProps = {
 };
 
 export const DayPlanViewer = ({ lilius, plan }: DayPlanViewerProps) => {
-  const selectedDay = lilius.selected.length == 0 ? null : lilius.selected[0];
+  const selectedDay = lilius.selected.length === 0 ? null : lilius.selected[0];
 
   const hasDayPlan = selectedDay
     ? !!plan.data[selectedDay.toISOString()]
@@ -42,7 +42,10 @@ export const DayPlanViewer = ({ lilius, plan }: DayPlanViewerProps) => {
         ? plan.data[selectedDay.toISOString()][0].distance.toString()
         : '5',
     );
-  }, [selectedDay ? plan.data[selectedDay.toISOString()] : selectedDay]);
+  }, [
+    hasDayPlan,
+    selectedDay ? plan.data[selectedDay.toISOString()] : selectedDay,
+  ]);
 
   const renderHeader = () => {
     const renderHeaderXIcon = (
