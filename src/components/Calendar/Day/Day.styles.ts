@@ -15,7 +15,7 @@ export const EmptyDayContainer = styled.div`
 `;
 
 export const DayContainer = styled(EmptyDayContainer)`
-  :hover {
+  &:hover {
     background-color: ${themeGet(fromTheme.colors.canvas.subtle)};
   }
   :active {

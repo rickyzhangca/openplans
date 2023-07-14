@@ -69,7 +69,7 @@ export const HeaderIconContainer = styled.div`
   padding: 8px;
   border-radius: 6px;
   fill: ${themeGet(fromTheme.colors.fg.subtle)};
-  :hover {
+  &:hover {
     fill: ${themeGet(fromTheme.colors.fg.default)};
     background-color: ${themeGet(fromTheme.colors.canvas.inset)};
   }

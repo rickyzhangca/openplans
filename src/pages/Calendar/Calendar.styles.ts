@@ -15,14 +15,6 @@ export const Container = styled.div`
 `;
 
 export const LeftContainer = styled.div`
-  display: flex;
-  overflow: visible;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-`;
-
-export const RightContainer = styled.div`
   position: sticky;
   // header height - amount of decreased + gap
   top: calc(80px - (20px - 6px) * 2 + 16px);
@@ -33,6 +25,14 @@ export const RightContainer = styled.div`
     bottom: 16px;
     width: calc(100% - 16px - 16px);
   }
+`;
+
+export const RightContainer = styled.div`
+  display: flex;
+  overflow: visible;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
 `;
 
 export const RunTypeOption = styled.div`

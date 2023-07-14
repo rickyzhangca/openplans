@@ -1,7 +1,5 @@
-import { themeGet } from '@primer/react';
 import styled from 'styled-components';
 import { devices } from '../../../theme/device';
-import { fromTheme } from '../../../theme/fromTheme';
 
 export const Container = styled.div`
   display: flex;
@@ -20,9 +18,6 @@ export const ItemContainer = styled.div<{ selected: boolean }>`
   padding: 8px 12px;
   user-select: none;
   cursor: pointer;
-  :hover {
-    background-color: ${themeGet(fromTheme.colors.canvas.subtle)};
-  }
   @media ${devices.mobile} {
     flex-direction: column-reverse;
     padding: 16px 12px;

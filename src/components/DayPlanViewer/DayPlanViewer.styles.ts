@@ -39,7 +39,7 @@ export const HeaderXIconWrapper = styled.div`
   padding: 8px;
   color: ${themeGet(fromTheme.colors.fg.subtle)};
   cursor: pointer;
-  :hover {
+  &:hover {
     color: ${themeGet(fromTheme.colors.fg.default)};
   }
   @media ${devices.mobile} {

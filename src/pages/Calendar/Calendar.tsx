@@ -48,11 +48,11 @@ export const Calendar = () => {
   return (
     <Container>
       <LeftContainer>
-        {calendar}
-        <ExportBar calendar={calendar} />
+        <DayPlanViewer lilius={lilius} plan={plan} />
       </LeftContainer>
       <RightContainer>
-        <DayPlanViewer lilius={lilius} plan={plan} />
+        {calendar}
+        <ExportBar calendar={calendar} />
       </RightContainer>
     </Container>
   );
