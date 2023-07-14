@@ -9,22 +9,21 @@ import {
 } from 'react-router-dom';
 import styled from 'styled-components';
 import { Header } from './components/Header/Header';
+import { About } from './pages/About/About';
+import { Calendar } from './pages/Calendar/Calendar';
+import { MyPlans } from './pages/MyPlans/MyPlans';
 import { fromTheme } from './theme/fromTheme';
 import { HeaderTabsType } from './types/ui';
-import { About } from './views/About/About';
-import { MyPlans } from './views/MyPlans/MyPlans';
 
 const tabs: HeaderTabsType = [
   {
     title: 'My plans',
     value: 'my-plans',
   },
-  /*
   {
-    title: 'Expert plans',
-    value: 'expert-plans',
+    title: 'Calendar',
+    value: 'calendar',
   },
-  */
   {
     title: 'About',
     value: 'about',
@@ -61,8 +60,8 @@ const router = createBrowserRouter([
     element: withTitle('My Plans', withNavigation(<MyPlans />)),
   },
   {
-    path: '/expert-plans',
-    element: withTitle('Expert Plans', withNavigation(<>2</>)),
+    path: '/calendar',
+    element: withTitle('Calendar', withNavigation(<Calendar />)),
   },
   {
     path: '/about',

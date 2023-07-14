@@ -1,13 +1,13 @@
 import dayjs from 'dayjs';
 import { useLilius } from 'use-lilius';
 import { useEffectOnce, useLocalStorage } from 'usehooks-ts';
-import { Calendar } from '../../components/Calendar/Calendar';
+import { Calendar as CalendarComponent } from '../../components/Calendar/Calendar';
 import { DayPlanViewer } from '../../components/DayPlanViewer/DayPlanViewer';
 import usePlan, { RunTypes } from '../../hooks/usePlan';
+import { Container, LeftContainer, RightContainer } from './Calendar.styles';
 import { ExportBar } from './ExportBar/ExportBar';
-import { Container, LeftContainer, RightContainer } from './MyPlans.styles';
 
-export const MyPlans = () => {
+export const Calendar = () => {
   const [numberOfMonths, setNumberOfMonths] = useLocalStorage(
     'number-of-months',
     2,
@@ -35,7 +35,7 @@ export const MyPlans = () => {
   });
 
   const calendar = (
-    <Calendar
+    <CalendarComponent
       lilius={lilius}
       plan={plan}
       setViewing={(day) => setViewing(day)}
