@@ -9,23 +9,27 @@ export const EmptyDayContainer = styled.div`
   align-items: center;
   gap: 8px;
   padding: 20px;
-  border-radius: 6px;
   user-select: none;
   flex: 1;
 `;
 
 export const DayContainer = styled(EmptyDayContainer)`
+  box-shadow:
+    inset 0 0 0 0.5px ${themeGet(fromTheme.colors.border.default)},
+    0 0 0 0.5px ${themeGet(fromTheme.colors.border.default)};
   &:hover {
     background-color: ${themeGet(fromTheme.colors.canvas.subtle)};
   }
-  :active {
+  &:active {
     background-color: ${themeGet(fromTheme.colors.canvas.inset)};
-    box-shadow: inset 0 0 0 1px ${themeGet(fromTheme.colors.border.default)};
   }
 `;
 
 export const SelectedDayContainer = styled(EmptyDayContainer)`
+  z-index: 1;
   color: ${themeGet(fromTheme.colors.accent.fg)};
   background-color: ${themeGet(fromTheme.colors.canvas.subtle)};
-  box-shadow: inset 0 0 0 1px ${themeGet(fromTheme.colors.accent.fg)};
+  box-shadow:
+    inset 0 0 0 0.5px ${themeGet(fromTheme.colors.accent.fg)},
+    0 0 0 0.5px ${themeGet(fromTheme.colors.accent.fg)};
 `;

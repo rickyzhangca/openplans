@@ -1,6 +1,5 @@
 import { themeGet } from '@primer/react';
 import styled from 'styled-components';
-import { devices } from '../../../theme/device';
 import { fromTheme } from '../../../theme/fromTheme';
 import { BodyMedium } from '../../../theme/typography';
 
@@ -9,26 +8,34 @@ export const MonthContainer = styled.div`
   flex-direction: column;
   width: 100%;
   border-radius: 12px;
-  border: 1px solid ${themeGet(fromTheme.colors.border.default)};
-  gap: 8px;
-  padding-bottom: 8px;
+  box-shadow:
+    0 0 0 0.5px inset ${themeGet(fromTheme.colors.border.default)},
+    0 0 0 0.5px ${themeGet(fromTheme.colors.border.default)};
 `;
 
 export const MonthHeader = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
-  padding: 20px 20px 12px 20px;
+  padding: 20px 20px 8px 20px;
 `;
 
 export const DayNamesContainer = styled.div`
   display: flex;
-  gap: 8px;
-  padding: 0 16px;
-  border-bottom: 1px solid ${themeGet(fromTheme.colors.border.default)};
-  @media ${devices.mobile} {
-    padding: 0 8px;
-  }
+`;
+
+export const DayNamesDivider = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: ${themeGet(fromTheme.colors.border.default)};
+  transform: translateY(0.5px);
+`;
+
+export const MonthlyStatsDivider = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: ${themeGet(fromTheme.colors.border.default)};
+  transform: translateY(-0.5px);
 `;
 
 export const DayName = styled(BodyMedium)`

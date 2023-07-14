@@ -39,6 +39,7 @@ export const Calendar = () => {
       lilius={lilius}
       plan={plan}
       setViewing={(day) => setViewing(day)}
+      onSelect={(day) => lilius.setSelected([day])}
       onSetNumberOfMonths={(numberOfMonths) =>
         setNumberOfMonths(numberOfMonths)
       }

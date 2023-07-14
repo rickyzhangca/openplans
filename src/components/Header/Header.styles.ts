@@ -73,7 +73,7 @@ export const HeaderIconContainer = styled.div`
     fill: ${themeGet(fromTheme.colors.fg.default)};
     background-color: ${themeGet(fromTheme.colors.canvas.inset)};
   }
-  :active {
+  &:active {
     background-color: ${themeGet(fromTheme.colors.neutral.muted)};
   }
   @media ${devices.mobile} {

@@ -7,8 +7,10 @@ import { Week } from '../Week/Week';
 import {
   DayName,
   DayNamesContainer,
+  DayNamesDivider,
   MonthContainer,
   MonthHeader,
+  MonthlyStatsDivider,
 } from './Month.styles';
 
 type MonthProps = {
@@ -42,6 +44,7 @@ export const Month = memo(({ selected, onSelect, month, plan }: MonthProps) => {
     <MonthContainer key={uuidv4()}>
       {renderMonthHeader()}
       {renderDayNames()}
+      <DayNamesDivider />
       {month.map((week) => (
         <Week
           key={uuidv4()}
@@ -53,6 +56,8 @@ export const Month = memo(({ selected, onSelect, month, plan }: MonthProps) => {
           lastDayOfMonth={lastDayOfMonth}
         />
       ))}
+      <MonthlyStatsDivider />
+      <div style={{ height: '40px' }} />
     </MonthContainer>
   );
 });

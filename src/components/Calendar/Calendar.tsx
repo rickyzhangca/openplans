@@ -19,6 +19,7 @@ dayjs.extend(isBetween);
 type CalendarProps = {
   lilius: Returns;
   plan: Plan;
+  onSelect: (day: Date) => void;
   setViewing: (day: Date) => void;
   onSetNumberOfMonths: (numberOfMonths: number) => void;
 };
@@ -27,6 +28,7 @@ export const Calendar = ({
   lilius,
   plan,
   setViewing,
+  onSelect,
   onSetNumberOfMonths,
 }: CalendarProps) => {
   const months = lilius.calendar;
@@ -111,7 +113,7 @@ export const Calendar = ({
         <Month
           key={uuidv4()}
           selected={lilius.selected ? lilius.selected[0] : null}
-          onSelect={(day) => lilius.setSelected([day])}
+          onSelect={onSelect}
           month={month}
           plan={plan}
         />
