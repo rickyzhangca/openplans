@@ -2,7 +2,6 @@ import dayjs from 'dayjs';
 import { useLilius } from 'use-lilius';
 import { useEffectOnce, useLocalStorage } from 'usehooks-ts';
 import { Calendar as CalendarComponent } from '../../components/Calendar/Calendar';
-import { DayPlanViewer } from '../../components/DayPlanViewer/DayPlanViewer';
 import usePlan, { RunTypes } from '../../hooks/usePlan';
 import { Container, LeftContainer, RightContainer } from './Calendar.styles';
 import { ExportBar } from './ExportBar/ExportBar';
@@ -48,9 +47,7 @@ export const Calendar = () => {
 
   return (
     <Container>
-      <LeftContainer>
-        <DayPlanViewer lilius={lilius} plan={plan} />
-      </LeftContainer>
+      <LeftContainer>put a month list</LeftContainer>
       <RightContainer>
         {calendar}
         <ExportBar calendar={calendar} />

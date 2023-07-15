@@ -45,7 +45,6 @@ export const MonthControlButtonAbsoluteContainer = styled(
   left: 0px;
   right: 0px;
   padding: 0px;
-  z-index: 1;
   ${MonthControlButton} {
     transform: translateY(-50%);
   }

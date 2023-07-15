@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { Returns } from 'use-lilius';
 import { v4 as uuidv4 } from 'uuid';
 import { Plan } from '../../../hooks/usePlan';
 import { Day } from '../Day/Day';
@@ -11,6 +12,8 @@ type WeekProps = {
   plan: Plan;
   firstDayOfMonth: Date;
   lastDayOfMonth: Date;
+  // STUB - remove lilius
+  lilius: Returns;
 };
 
 export const Week = memo(
@@ -21,6 +24,7 @@ export const Week = memo(
     plan,
     firstDayOfMonth,
     lastDayOfMonth,
+    lilius,
   }: WeekProps) => {
     return (
       <WeekContainer>
@@ -35,6 +39,8 @@ export const Week = memo(
             }
             firstDayOfMonth={firstDayOfMonth}
             lastDayOfMonth={lastDayOfMonth}
+            lilius={lilius}
+            plan={plan}
           />
         ))}
       </WeekContainer>

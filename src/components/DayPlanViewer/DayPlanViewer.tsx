@@ -10,62 +10,45 @@ import {
   ConfigsContainer,
   Container,
   HeaderContainer,
-  HeaderPlaceholderText,
   HeaderXIconWrapper,
 } from './DayPlanViewer.styles';
 
 type DayPlanViewerProps = {
   lilius: Returns;
+  day: Date;
   plan: Plan;
 };
 
-export const DayPlanViewer = ({ lilius, plan }: DayPlanViewerProps) => {
-  const selectedDay = lilius.selected.length === 0 ? null : lilius.selected[0];
+export const DayPlanViewer = ({ lilius, day, plan }: DayPlanViewerProps) => {
+  const hasDayPlan = !!plan.data[day.toISOString()];
 
-  const hasDayPlan = selectedDay
-    ? !!plan.data[selectedDay.toISOString()]
-    : false;
-
-  const [runType, setRunType] = useState(null);
+  const [runType, setRunType] = useState(RunTypes.REST);
   const [currentDistance, setCurrentDistance] = useState('');
 
   useEffect(() => {
     setRunType(
-      selectedDay
-        ? hasDayPlan
-          ? plan.data[selectedDay.toISOString()][0].runType
-          : RunTypes.REST
-        : null,
+      hasDayPlan ? plan.data[day.toISOString()][0].runType : RunTypes.REST,
     );
     setCurrentDistance(
-      hasDayPlan
-        ? plan.data[selectedDay.toISOString()][0].distance.toString()
-        : '5',
+      hasDayPlan ? plan.data[day.toISOString()][0].distance.toString() : '5',
     );
-  }, [
-    hasDayPlan,
-    selectedDay ? plan.data[selectedDay.toISOString()] : selectedDay,
-  ]);
+  }, [day, hasDayPlan, plan.data]);
 
   const renderHeader = () => {
     const renderHeaderXIcon = (
-      <HeaderXIconWrapper onClick={() => lilius.setSelected([])}>
+      <HeaderXIconWrapper
+        onClick={() => {
+          lilius.setSelected([]);
+        }}
+      >
         <XCircleFillIcon />
       </HeaderXIconWrapper>
     );
     return (
       <HeaderContainer>
-        {selectedDay ? (
-          <>
-            {renderHeaderXIcon}
-            <TitleSmall>{dayjs(selectedDay).format('MMM')}</TitleSmall>
-            <Display>{selectedDay.getDate()}</Display>
-          </>
-        ) : (
-          <HeaderPlaceholderText>
-            Choose a day on calendar
-          </HeaderPlaceholderText>
-        )}
+        {renderHeaderXIcon}
+        <TitleSmall>{dayjs(day).format('MMM')}</TitleSmall>
+        <Display>{day.getDate()}</Display>
       </HeaderContainer>
     );
   };
@@ -75,9 +58,9 @@ export const DayPlanViewer = ({ lilius, plan }: DayPlanViewerProps) => {
       selected={runType}
       onSelect={(type) => {
         if (type === RunTypes.REST) {
-          plan.removeDayPlan(selectedDay);
+          plan.removeDayPlan(day);
         } else {
-          plan.setDayPlan(selectedDay, [
+          plan.setDayPlan(day, [
             {
               runType: type,
               distance: Number(currentDistance),
@@ -90,19 +73,11 @@ export const DayPlanViewer = ({ lilius, plan }: DayPlanViewerProps) => {
 
   const renderConfigs = () => (
     <ConfigsContainer>
-      <FormControl disabled={!selectedDay || runType === RunTypes.REST}>
+      <FormControl disabled={!day || runType === RunTypes.REST}>
         <FormControl.Label>Distance</FormControl.Label>
         <TextInput
           value={currentDistance}
           onChange={(e) => setCurrentDistance(e.target.value)}
-          onBlur={() =>
-            plan.setDayPlan(selectedDay, [
-              {
-                runType,
-                distance: Number(currentDistance),
-              },
-            ])
-          }
           trailingVisual="km"
           aria-label="Distance to run"
           name="distance"
@@ -113,10 +88,23 @@ export const DayPlanViewer = ({ lilius, plan }: DayPlanViewerProps) => {
   );
 
   return (
-    <Container hasSelectedDay={!!selectedDay}>
+    <Container>
       {renderHeader()}
       {renderOptions()}
       {renderConfigs()}
+      <button
+        onClick={() => {
+          plan.setDayPlan(day, [
+            {
+              runType,
+              distance: Number(currentDistance),
+            },
+          ]);
+          lilius.setSelected([]);
+        }}
+      >
+        Save
+      </button>
     </Container>
   );
 };

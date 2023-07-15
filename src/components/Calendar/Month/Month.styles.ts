@@ -1,7 +1,7 @@
 import { themeGet } from '@primer/react';
 import styled from 'styled-components';
 import { fromTheme } from '../../../theme/fromTheme';
-import { BodyMedium } from '../../../theme/typography';
+import { BodySmall } from '../../../theme/typography';
 
 export const MonthContainer = styled.div`
   display: flex;
@@ -38,11 +38,11 @@ export const MonthlyStatsDivider = styled.div`
   transform: translateY(-0.5px);
 `;
 
-export const DayName = styled(BodyMedium)`
+export const DayName = styled(BodySmall)`
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
-  padding: 12px 0px;
+  padding: 8px 0px;
   color: ${themeGet(fromTheme.colors.fg.muted)};
 `;

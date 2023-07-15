@@ -116,6 +116,7 @@ export const Calendar = ({
           onSelect={onSelect}
           month={month}
           plan={plan}
+          lilius={lilius}
         />
       ))}
       <MonthControlButtonContainer>

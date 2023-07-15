@@ -1,14 +1,17 @@
 import * as Popover from '@radix-ui/react-popover';
 import dayjs from 'dayjs';
 import { memo } from 'react';
+import { Returns } from 'use-lilius';
 import { v4 as uuidv4 } from 'uuid';
-import { DayPlan, RunTypes } from '../../../hooks/usePlan';
-import { BodyLarge } from '../../../theme/typography';
+import { DayPlan, Plan, RunTypes } from '../../../hooks/usePlan';
+import { BodyMedium } from '../../../theme/typography';
 import { Chip } from '../../Chip/Chip';
+import { DayPlanViewer } from '../../DayPlanViewer/DayPlanViewer';
 import {
   DayContainer,
   EmptyDayContainer,
   SelectedDayContainer,
+  StyledPopoverRoot,
 } from './Day.styles';
 
 type DayProps = {
@@ -18,6 +21,9 @@ type DayProps = {
   dayPlan: DayPlan[];
   firstDayOfMonth: Date;
   lastDayOfMonth: Date;
+  // STUB - remove lilius
+  lilius: Returns;
+  plan: Plan;
 };
 
 export const Day = memo(
@@ -28,29 +34,41 @@ export const Day = memo(
     dayPlan,
     firstDayOfMonth,
     lastDayOfMonth,
+    lilius,
+    plan,
   }: DayProps) => {
+    const isSelected = selected === day;
+
     const withPopover = (Component: JSX.Element) => {
       return (
-        <Popover.Root open={false}>
+        <StyledPopoverRoot
+          open={isSelected}
+          onOpenChange={(open) => {
+            if (!open) {
+              lilius.setSelected([]);
+            }
+          }}
+        >
           <Popover.Trigger asChild>{Component}</Popover.Trigger>
           <Popover.Portal>
-            <Popover.Content className="PopoverContent" sideOffset={5}>
-              content
-              <Popover.Close className="PopoverClose" aria-label="Close">
-                close
-              </Popover.Close>
-              <Popover.Arrow className="PopoverArrow" />
+            <Popover.Content
+              side="right"
+              sideOffset={5}
+              collisionPadding={{ top: 120 }}
+            >
+              <DayPlanViewer lilius={lilius} day={day} plan={plan} />
+              <Popover.Arrow />
             </Popover.Content>
           </Popover.Portal>
-        </Popover.Root>
+        </StyledPopoverRoot>
       );
     };
 
     if (dayjs(day).isBetween(firstDayOfMonth, lastDayOfMonth, 'day', '[]')) {
-      return dayjs(selected).isSame(day)
+      return isSelected
         ? withPopover(
             <SelectedDayContainer key={uuidv4()} onClick={() => onSelect(day)}>
-              <BodyLarge>{dayjs(day).format('D')}</BodyLarge>
+              <BodyMedium>{dayjs(day).format('D')}</BodyMedium>
               {dayPlan ? (
                 <Chip
                   type={dayPlan[0].runType}
@@ -63,7 +81,7 @@ export const Day = memo(
           )
         : withPopover(
             <DayContainer key={uuidv4()} onClick={() => onSelect(day)}>
-              <BodyLarge>{dayjs(day).format('D')}</BodyLarge>
+              <BodyMedium>{dayjs(day).format('D')}</BodyMedium>
               {dayPlan ? (
                 <Chip
                   type={dayPlan[0].runType}

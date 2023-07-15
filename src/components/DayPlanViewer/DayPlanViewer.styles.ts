@@ -2,24 +2,14 @@ import { themeGet } from '@primer/react';
 import styled from 'styled-components';
 import { devices } from '../../theme/device';
 import { fromTheme } from '../../theme/fromTheme';
-import { BodySmall } from '../../theme/typography';
 
-export const Container = styled.div<{ hasSelectedDay: boolean }>`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${themeGet(fromTheme.colors.canvas.default)};
   border: 1px solid ${themeGet(fromTheme.colors.border.default)};
   overflow: hidden;
   border-radius: 12px;
-  @media ${devices.mobile} {
-    ${(props) => (props.hasSelectedDay ? 'display: block;' : 'display: none;')}
-    box-shadow: ${themeGet(fromTheme.shadows.shadow.extraLarge)};
-  }
-`;
-
-export const HeaderPlaceholderText = styled(BodySmall)`
-  color: ${themeGet(fromTheme.colors.fg.muted)};
-  text-align: center;
 `;
 
 export const HeaderContainer = styled.div`

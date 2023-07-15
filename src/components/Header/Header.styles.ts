@@ -9,7 +9,7 @@ export const Wrapper = styled.div<{ minimal: boolean }>`
   position: sticky;
   top: 0;
   height: 80px;
-  ${(props) => props.minimal && 'z-index: 1;'}
+  ${(props) => props.minimal && 'z-index: 2;'}
   @media ${devices.mobile} {
     height: 120px;
   }
