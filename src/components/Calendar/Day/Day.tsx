@@ -1,8 +1,9 @@
 import * as Popover from '@radix-ui/react-popover';
 import dayjs from 'dayjs';
+import { useAtom } from 'jotai';
 import { memo } from 'react';
-import { Returns } from 'use-lilius';
 import { v4 as uuidv4 } from 'uuid';
+import { atoms } from '../../../context/atoms';
 import { DayPlan, Plan, RunTypes } from '../../../hooks/usePlan';
 import { BodyMedium } from '../../../theme/typography';
 import { Chip } from '../../Chip/Chip';
@@ -21,8 +22,6 @@ type DayProps = {
   dayPlan: DayPlan[];
   firstDayOfMonth: Date;
   lastDayOfMonth: Date;
-  // STUB - remove lilius
-  lilius: Returns;
   plan: Plan;
 };
 
@@ -34,18 +33,19 @@ export const Day = memo(
     dayPlan,
     firstDayOfMonth,
     lastDayOfMonth,
-    lilius,
     plan,
   }: DayProps) => {
     const isSelected = selected === day;
 
     const withPopover = (Component: JSX.Element) => {
+      const [, setSelectedDates] = useAtom(atoms.selectedDates);
+
       return (
         <StyledPopoverRoot
           open={isSelected}
           onOpenChange={(open) => {
             if (!open) {
-              lilius.setSelected([]);
+              setSelectedDates([]);
             }
           }}
         >
@@ -56,7 +56,7 @@ export const Day = memo(
               sideOffset={5}
               collisionPadding={{ top: 120 }}
             >
-              <DayPlanViewer lilius={lilius} day={day} plan={plan} />
+              <DayPlanViewer day={day} plan={plan} />
               <Popover.Arrow />
             </Popover.Content>
           </Popover.Portal>

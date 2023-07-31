@@ -2,8 +2,9 @@ import { PlusIcon, XIcon } from '@primer/octicons-react';
 import { useTheme } from '@primer/react';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
-import { Returns } from 'use-lilius';
+import { useAtom } from 'jotai';
 import { v4 as uuidv4 } from 'uuid';
+import { atoms } from '../../context/atoms';
 import { Plan } from '../../hooks/usePlan';
 import { BodyButton } from '../../theme/typography';
 import {
@@ -17,33 +18,19 @@ import { Month } from './Month/Month';
 dayjs.extend(isBetween);
 
 type CalendarProps = {
-  lilius: Returns;
   plan: Plan;
+  selected: Date;
   onSelect: (day: Date) => void;
-  setViewing: (day: Date) => void;
-  onSetNumberOfMonths: (numberOfMonths: number) => void;
 };
 
-export const Calendar = ({
-  lilius,
-  plan,
-  setViewing,
-  onSelect,
-  onSetNumberOfMonths,
-}: CalendarProps) => {
-  const months = lilius.calendar;
+export const Calendar = ({ plan, selected, onSelect }: CalendarProps) => {
+  const [months] = useAtom(atoms.calendar);
   const theme = useTheme();
 
   const renderAddPreviousMonthButton = () => {
     const previousMonth = dayjs(months[0][1][0]).subtract(1, 'month');
     return (
-      <MonthControlButton
-        onClick={() => {
-          lilius.viewPreviousMonth();
-          onSetNumberOfMonths(lilius.calendar.length + 1);
-          setViewing(previousMonth.toDate());
-        }}
-      >
+      <MonthControlButton onClick={() => {}}>
         <PlusIcon />
         <BodyButton>{`${previousMonth.format('MMM')} ${previousMonth.format(
           'YYYY',
@@ -56,13 +43,7 @@ export const Calendar = ({
     const firstMonth = dayjs(months[0][1][0]);
     const secondMonth = firstMonth.add(1, 'month');
     return (
-      <MonthControlButton
-        onClick={() => {
-          lilius.viewNextMonth();
-          onSetNumberOfMonths(lilius.calendar.length - 1);
-          setViewing(secondMonth.toDate());
-        }}
-      >
+      <MonthControlButton onClick={() => {}}>
         <XIcon fill={theme.theme.colors.danger.fg} />
         <BodyButton color={theme.theme.colors.danger.fg}>{`${firstMonth.format(
           'MMM',
@@ -74,11 +55,7 @@ export const Calendar = ({
   const renderAddNextMonthButton = () => {
     const nextMonth = dayjs(months[months.length - 1][1][0]).add(1, 'month');
     return (
-      <MonthControlButton
-        onClick={() => {
-          onSetNumberOfMonths(lilius.calendar.length + 1);
-        }}
-      >
+      <MonthControlButton onClick={() => {}}>
         <PlusIcon />
         <BodyButton>{`${nextMonth.format('MMM')} ${nextMonth
           .add(1, 'month')
@@ -90,11 +67,7 @@ export const Calendar = ({
   const renderRemoveLastMonthButton = () => {
     const lastMonth = dayjs(months[months.length - 1][1][0]);
     return (
-      <MonthControlButton
-        onClick={() => {
-          onSetNumberOfMonths(lilius.calendar.length - 1);
-        }}
-      >
+      <MonthControlButton onClick={() => {}}>
         <XIcon fill={theme.theme.colors.danger.fg} />
         <BodyButton color={theme.theme.colors.danger.fg}>{`${lastMonth.format(
           'MMM',
@@ -112,11 +85,10 @@ export const Calendar = ({
       {months.map((month) => (
         <Month
           key={uuidv4()}
-          selected={lilius.selected ? lilius.selected[0] : null}
+          selected={selected}
           onSelect={onSelect}
           month={month}
           plan={plan}
-          lilius={lilius}
         />
       ))}
       <MonthControlButtonContainer>

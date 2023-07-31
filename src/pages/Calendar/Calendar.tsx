@@ -1,31 +1,19 @@
 import dayjs from 'dayjs';
-import { useLilius } from 'use-lilius';
-import { useEffectOnce, useLocalStorage } from 'usehooks-ts';
+import { useAtom } from 'jotai';
+import { useEffectOnce } from 'usehooks-ts';
 import { Calendar as CalendarComponent } from '../../components/Calendar/Calendar';
+import { atoms } from '../../context/atoms';
 import usePlan, { RunTypes } from '../../hooks/usePlan';
 import { Container, LeftContainer, RightContainer } from './Calendar.styles';
 import { ExportBar } from './ExportBar/ExportBar';
 
 export const Calendar = () => {
-  const [numberOfMonths, setNumberOfMonths] = useLocalStorage(
-    'number-of-months',
-    2,
-  );
-  const [viewing, setViewing] = useLocalStorage(
-    'default-viewing',
-    dayjs().subtract(1, 'month').toDate(),
-  );
+  const [selectedDates, setSelectedDates] = useAtom(atoms.selectedDates);
 
-  const lilius = useLilius({
-    viewing: dayjs(viewing).toDate(),
-    numberOfMonths,
-  });
   const plan = usePlan();
 
   useEffectOnce(() => {
-    const today = dayjs().startOf('day').toDate();
-    lilius.setSelected([today]);
-    plan.setDayPlan(today, [
+    plan.setDayPlan(dayjs().startOf('day').toDate(), [
       {
         runType: RunTypes.EASY_RUN,
         distance: 5,
@@ -35,13 +23,9 @@ export const Calendar = () => {
 
   const calendar = (
     <CalendarComponent
-      lilius={lilius}
       plan={plan}
-      setViewing={(day) => setViewing(day)}
-      onSelect={(day) => lilius.setSelected([day])}
-      onSetNumberOfMonths={(numberOfMonths) =>
-        setNumberOfMonths(numberOfMonths)
-      }
+      selected={selectedDates[0]}
+      onSelect={(day) => setSelectedDates([day])}
     />
   );
 

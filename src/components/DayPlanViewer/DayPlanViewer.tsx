@@ -1,8 +1,9 @@
 import { XCircleFillIcon } from '@primer/octicons-react';
 import { FormControl, TextInput } from '@primer/react';
 import dayjs from 'dayjs';
+import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
-import { Returns } from 'use-lilius';
+import { atoms } from '../../context/atoms';
 import { Plan, RunTypes } from '../../hooks/usePlan';
 import { Display, TitleSmall } from '../../theme/typography';
 import { DayPlanOptions } from './DayPlanOptions/DayPlanOptions';
@@ -14,16 +15,17 @@ import {
 } from './DayPlanViewer.styles';
 
 type DayPlanViewerProps = {
-  lilius: Returns;
   day: Date;
   plan: Plan;
 };
 
-export const DayPlanViewer = ({ lilius, day, plan }: DayPlanViewerProps) => {
+export const DayPlanViewer = ({ day, plan }: DayPlanViewerProps) => {
   const hasDayPlan = !!plan.data[day.toISOString()];
 
   const [runType, setRunType] = useState(RunTypes.REST);
   const [currentDistance, setCurrentDistance] = useState('');
+
+  const [, setSelectedDates] = useAtom(atoms.selectedDates);
 
   useEffect(() => {
     setRunType(
@@ -36,11 +38,7 @@ export const DayPlanViewer = ({ lilius, day, plan }: DayPlanViewerProps) => {
 
   const renderHeader = () => {
     const renderHeaderXIcon = (
-      <HeaderXIconWrapper
-        onClick={() => {
-          lilius.setSelected([]);
-        }}
-      >
+      <HeaderXIconWrapper onClick={() => setSelectedDates([])}>
         <XCircleFillIcon />
       </HeaderXIconWrapper>
     );
@@ -100,7 +98,7 @@ export const DayPlanViewer = ({ lilius, day, plan }: DayPlanViewerProps) => {
               distance: Number(currentDistance),
             },
           ]);
-          lilius.setSelected([]);
+          setSelectedDates([]);
         }}
       >
         Save
